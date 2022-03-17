@@ -2,8 +2,11 @@
 Repositório da disciplina de Algoritmos e Estruturas de Dados I do curso de Engenharia de Computação da UFPel
 
 Luísa Treptow Ribeiro
+
 Engenharia de Computação 
+
 Matrícula 20103614
+
 
 Link do Drive com videos explicativos: https://drive.google.com/drive/folders/1XAWGge1BeKePbCBW9CgsCxTDHYGN6mel?usp=sharing
 
