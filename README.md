@@ -10,7 +10,7 @@ Matrícula 20103614
 
 Link do Drive com videos explicativos: https://drive.google.com/drive/folders/1XAWGge1BeKePbCBW9CgsCxTDHYGN6mel?usp=sharing
 
-<<<<<<< HEAD
+
 Link Github: https://github.com/lutribeiro/AED-I
 
 Lista 1
@@ -25,16 +25,3 @@ Lista 1
         2) Remover nome
         3) Listar
         4) Sair 
-=======
-Lista 1<br/>
-    Exercicio_1   --  Hello World<br/>
-    <br/>
-    Exercicio_2   --  Faça um programa que armazena nomes. O programa deve armazenar todos os nomes na mesma string.
-                    O tamanho da string deve crescer e diminuir conforme nomes forem colocados ou removidos. 
-                    Não pode ter desperdício de memória.
-                    Faça o seguinte menu:<br/>
-                    1) Adicionar nome<br/>
-                    2) Remover nome<br/>
-                    3) Listar<br/>
-                    4) Sair<br/>
->>>>>>> f52097d8caf9eb91c699fb504a7d33a8b0330dfa
