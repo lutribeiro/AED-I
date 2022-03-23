@@ -10,9 +10,9 @@ void listContact (void *pBuffer);
 void searchContact (void *pBuffer);
 
 #define NAMECONTACT (sizeof(char) * 10)
-#define AGECONTACT sizeof(int)
-#define PHONECONTACT sizeof(int)
-#define COUNTER sizeof(int)
+#define AGECONTACT (sizeof(int))
+#define PHONECONTACT (sizeof(int))
+#define COUNTER (sizeof(int))
 
 
 int main(){
@@ -20,7 +20,7 @@ int main(){
 
 	void *pBuffer = NULL;
 
-	pBuffer = malloc(NAMECONTACT); // alocação de memória necessária
+	pBuffer = malloc(COUNTER); // alocação de memória necessária
 	
 	*(int *)pBuffer = 0;
 	
@@ -121,6 +121,7 @@ void *removeContact (void *pBuffer){
                     *(int *)(pBuffer + COUNTER + NAMECONTACT + ((NAMECONTACT + AGECONTACT + PHONECONTACT) * j)) = *(int *)(pBuffer + COUNTER + NAMECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (j + 1));
                     *(int *)(pBuffer + COUNTER + NAMECONTACT + AGECONTACT + ((NAMECONTACT + AGECONTACT + PHONECONTACT * j))) = *(int *)(pBuffer + COUNTER + NAMECONTACT + AGECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (j + 1));
                 }
+				
                 *(int *)pBuffer = indexList - 1;
                 pBuffer = realloc(pBuffer, COUNTER + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (indexList - 1));
                 return pBuffer;
