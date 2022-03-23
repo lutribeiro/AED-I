@@ -121,7 +121,7 @@ void *removeContact (void *pBuffer){
                     *(int *)(pBuffer + COUNTER + NAMECONTACT + ((NAMECONTACT + AGECONTACT + PHONECONTACT) * j)) = *(int *)(pBuffer + COUNTER + NAMECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (j + 1));
                     *(int *)(pBuffer + COUNTER + NAMECONTACT + AGECONTACT + ((NAMECONTACT + AGECONTACT + PHONECONTACT * j))) = *(int *)(pBuffer + COUNTER + NAMECONTACT + AGECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (j + 1));
                 }
-				
+
                 *(int *)pBuffer = indexList - 1;
                 pBuffer = realloc(pBuffer, COUNTER + (NAMECONTACT + AGECONTACT + PHONECONTACT) * (indexList - 1));
                 return pBuffer;
@@ -155,16 +155,16 @@ void listContact (void *pBuffer){
 
 void searchContact (void *pBuffer){
 	int indexList, i;
-    char search_NAMECONTACT[10];
+    char search_name[10];
     
     printf("\n\n**Insira o nome do contato buscado: \n");
-    scanf("%s", search_NAMECONTACT);
+    scanf("%s", search_name);
     getchar();
 
     indexList = *(int *)pBuffer;
 
     for(i = 0; i < indexList; i++){
-        if(strcmp((char *)pBuffer + COUNTER + (NAMECONTACT + AGECONTACT + PHONECONTACT) * i , search_NAMECONTACT) == 0){
+        if(strcmp((char *)pBuffer + COUNTER + (NAMECONTACT + AGECONTACT + PHONECONTACT) * i , search_name) == 0){
             printf("\nNome: %s\n", (char *)pBuffer + COUNTER + (NAMECONTACT + AGECONTACT + PHONECONTACT) * i);
             printf("\nIdade: %d\n", *(int *)(pBuffer + COUNTER + NAMECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * i));
             printf("\nNumero: %d\n", *(int *)(pBuffer + COUNTER + NAMECONTACT + AGECONTACT + (NAMECONTACT + AGECONTACT + PHONECONTACT) * i));
