@@ -7,8 +7,12 @@
 #define SHOW_LIST (sizeof(int))
 #define SEARCH (sizeof(char) * 10)
 #define COUNTER (sizeof(int))
-#define COUNTER1 (sizeof(int))
 #define REMOVE (sizeof(char) * 10)
+#define TOTAL (OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)
+#define TOTAL2 (OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER)
+#define TOTAL3 (OPTION + PEOPLE + SHOW_LIST + SEARCH)
+#define PERSON_SIZE (OPTION + PEOPLE)
+
 
 typedef struct{
     char name[10];
@@ -28,7 +32,7 @@ int main(){
 
 void *pBuffer = NULL;
 
-pBuffer = malloc(OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE + COUNTER1);
+pBuffer = malloc(TOTAL);
 
 if (!pBuffer){
     printf("Erro ao alocar memoria.\n");
@@ -119,12 +123,12 @@ void *removeContact (void *pBuffer){
         scanf("%s", (char *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER));
         getchar();
 
-        for(*(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) = 0; *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) < *(int *)(pBuffer + OPTION); *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) += 1){ // Aux Counter + 1
-            if(strcmp((char *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER), (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH)) -> name ) == 0) {  // Se o nome digitado estiver na lista entra aqui
-                 for(*(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE) = *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH); *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE) < *(int *)(pBuffer + OPTION); *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE) += 1){
-                    strcpy((pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> name, (pessoas + 1 + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> name);
-                    (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> age = (pessoas + 1 + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> age;
-                    (pessoas+ *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> number = (pessoas + 1 + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH + COUNTER + REMOVE)) -> number;
+        for(*(int *)(pBuffer + TOTAL3) = 0; *(int *)(pBuffer + TOTAL3) < *(int *)(pBuffer + OPTION); *(int *)(pBuffer + TOTAL3) += 1){ 
+            if(strcmp((char *)(pBuffer + TOTAL2), (pessoas + *(int *)(pBuffer + TOTAL3)) -> name ) == 0) {  
+                 for(*(int *)(pBuffer + TOTAL) = *(int *)(pBuffer + TOTAL3); *(int *)(pBuffer + TOTAL) < *(int *)(pBuffer + OPTION); *(int *)(pBuffer + TOTAL) += 1){
+                    strcpy((pessoas + *(int *)(pBuffer + TOTAL)) -> name, (pessoas + 1 + *(int *)(pBuffer + TOTAL)) -> name);
+                    (pessoas + *(int *)(pBuffer + TOTAL)) -> age = (pessoas + 1 + *(int *)(pBuffer + TOTAL)) -> age;
+                    (pessoas+ *(int *)(pBuffer + TOTAL)) -> number = (pessoas + 1 + *(int *)(pBuffer + TOTAL)) -> number;
                 }
                 printf ("\n\n Contato removido com sucesso :) \n\n");
 
@@ -133,7 +137,7 @@ void *removeContact (void *pBuffer){
             }
         }
         printf ("\n______________________________________\n");
-        printf("Nao ha ninguem com esse nome na lista\n\n");
+        printf("Nao ha ninguem com esse nome na lista :(\n\n");
     }
     return pBuffer;
 
@@ -148,11 +152,11 @@ void listContact(void *pBuffer){
         printf ("\t\t\n______________________\n");
         printf("\t\tLISTA DE NOMES\n\n");
        
-        for (*(int *)(pBuffer + OPTION + PEOPLE) = 0 ; *(int *)(pBuffer + OPTION + PEOPLE) < *(int*)(pBuffer + OPTION) ; *(int *)(pBuffer + OPTION + PEOPLE) += 1){
-            printf("Contato de posicao [%d] na lista:\n", *(int *)(pBuffer + OPTION + PEOPLE) + 1);
-            printf("\t- Nome: %s\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE)) -> name);
-            printf("\t- Idade: %d anos\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE)) -> age);
-            printf("\t- Numero: %d\n\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE)) -> number);
+        for (*(int *)(pBuffer + PERSON_SIZE) = 0 ; *(int *)(pBuffer + PERSON_SIZE) < *(int*)(pBuffer + OPTION) ; *(int *)(pBuffer + PERSON_SIZE) += 1){
+            printf("Contato de posicao [%d] na lista:\n", *(int *)(pBuffer + PERSON_SIZE) + 1);
+            printf("\t- Nome: %s\n", (pessoas + *(int *)(pBuffer + PERSON_SIZE)) -> name);
+            printf("\t- Idade: %d anos\n", (pessoas + *(int *)(pBuffer + PERSON_SIZE)) -> age);
+            printf("\t- Numero: %d\n\n", (pessoas + *(int *)(pBuffer + PERSON_SIZE)) -> number);
         }
     }
 
@@ -163,13 +167,13 @@ void searchContact(void *pBuffer){
     scanf("%s", (char *)(pBuffer + OPTION + PEOPLE + SHOW_LIST));
     getchar();
 
-    for(*(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) = 0; *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) <  *(int*)(pBuffer + OPTION); *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH) += 1){
-        if(strcmp((char *)(pBuffer + OPTION + PEOPLE + SHOW_LIST), (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH)) -> name ) == 0){
+    for(*(int *)(pBuffer + TOTAL3) = 0; *(int *)(pBuffer + TOTAL3) <  *(int*)(pBuffer + OPTION); *(int *)(pBuffer + TOTAL3) += 1){
+        if(strcmp((char *)(pBuffer + OPTION + PEOPLE + SHOW_LIST), (pessoas + *(int *)(pBuffer + TOTAL3)) -> name ) == 0){
             printf ("\n_____________________________\n");
             printf ("\nVoce esta falando deste contato?\n");
-            printf("\t- Nome: %s\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH)) -> name);
-            printf("\t- Idade: %d anos\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH)) -> age);
-            printf("\t- Numero: %d\n\n", (pessoas + *(int *)(pBuffer + OPTION + PEOPLE + SHOW_LIST + SEARCH)) -> number);
+            printf("\t- Nome: %s\n", (pessoas + *(int *)(pBuffer + TOTAL3)) -> name);
+            printf("\t- Idade: %d anos\n", (pessoas + *(int *)(pBuffer + TOTAL3)) -> age);
+            printf("\t- Numero: %d\n\n", (pessoas + *(int *)(pBuffer + TOTAL3)) -> number);
             return;
         }
     }
