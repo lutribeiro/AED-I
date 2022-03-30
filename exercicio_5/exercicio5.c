@@ -14,11 +14,8 @@ void *addMember(int counter, Pessoa *pPessoa);
 
 int main(){
 
-int counter = 0;
+int counter = 0, option;
 Pessoa *pPessoa = NULL;
-
-int option;
-
 
 
 do {
@@ -45,7 +42,7 @@ do {
             exit(0);
             break;
         default:
-            printf ("\n\nOpcao invalida, tente novamente!!");
+            printf ("\n\nOpcao invalida, tente novamente :) ");
             break;
         }
     }while ((option >= 1) || (option <= 2));
