@@ -28,22 +28,19 @@ int main(){
     struct timeval begin, end;
     float elapsed;
 
-    
-
-    srand(time(NULL)); 
-
     printf ("\nInsira um numero N para indicar o tamanho do vetor: ");
     scanf ("%d", &n);
     
     v = malloc(n * sizeof(int));
-    
+
+    srand(time(NULL)); 
     for (i=0; i<n; i++){
         v[i] = (rand() % MAX);
     }
 
-    printf ("\n------------------------");
+   
     readNotOrdered(v, n);
-    printf ("\n------------------------\n");
+    printf ("\n----------------------------------------------------------------------------------------------------------------");
 
     do{
         printf ("\nEscolha qual algoritmo deseja usar: \n");
@@ -144,6 +141,24 @@ int main(){
     }while (option>=1 || option <=5);
 }
 
+void *auxiliar (int *v, int n){
+    int i, *vAux;
+
+    vAux = NULL;
+    vAux = malloc(n * sizeof(int));
+    for (i=0; i<n; i++){
+        vAux [i]= v[i];
+    }
+    return vAux;
+}
+
+void readNotOrdered (int *v, int n){
+    int i;
+    printf("\nSEQUENCIA NAO ORDENADA: ");
+    for (i=0; i<n; i++){
+        printf ("| %d ", v[i]);    
+    }
+}
 
 void verifyAndPrint (int *v, int n){
     int i, j, c=0;
@@ -284,23 +299,4 @@ void merge(int *v, int left, int mid, int right) {
     
     free(aux);
     return;
-}
-
-void *auxiliar (int *v, int n){
-    int i, *vAux;
-
-    vAux = NULL;
-    vAux = malloc(n * sizeof(int));
-    for (i=0; i<n; i++){
-        vAux [i]= v[i];
-    }
-    return vAux;
-}
-
-void readNotOrdered (int *v, int n){
-    int i;
-    printf("\nSEQUENCIA NAO ORDENADA: ");
-    for (i=0; i<n; i++){
-        printf ("| %d ", v[i]);    
-    }
 }
