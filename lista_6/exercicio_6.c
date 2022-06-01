@@ -3,13 +3,12 @@
 #include <time.h>
 #include <sys/time.h>
 
-#define MAX 100000
+#define MAX 1000000
 
 /* 
-
 A Implementação será feita com a função gettimeofday()  
+Medindo tempo de parede
 https://levelup.gitconnected.com/8-ways-to-measure-execution-time-in-c-c-48634458d0f9
-
 */
 
 void insertionSort (int *v, int n);
@@ -20,8 +19,6 @@ void merge (int *v, int left, int mid, int right);
 void verifyAndPrint (int *v, int n);
 void *auxiliar (int *v, int n); 
 void readNotOrdered (int *v, int n);
-
-
 
 int main(){
 
@@ -70,7 +67,7 @@ int main(){
                 insertionSort(vAux, n);
                 gettimeofday(&end, 0);
 
-                elapsed = ((end.tv_sec - begin.tv_sec) + (end.tv_usec - begin.tv_usec))*1e-6;
+                /* elapsed = ((end.tv_sec - begin.tv_sec) + (end.tv_usec - begin.tv_usec))*1e-6; */
                 /* long seconds = end.tv_sec - begin.tv_sec;
                 long microseconds = end.tv_usec - begin.tv_usec;
                 double elapsed = seconds + microseconds*1e-6; */
@@ -79,7 +76,7 @@ int main(){
                 verifyAndPrint(vAux, n);
 
                 printf ("\n---------------------------------------------------------------------------");
-                printf ("\nO tempo final que o algoritmo - Insertion Sort - levou para ser computado foi de: %.8f s", elapsed);
+                printf ("\nO tempo final que o algoritmo - Insertion Sort - levou para ser computado foi de: %.8f s",((end.tv_sec - begin.tv_sec) + (end.tv_usec - begin.tv_usec))*1e-6);
 
                 elapsed = 0;
                 free(vAux);
@@ -99,7 +96,8 @@ int main(){
                 
                 printf ("\n---------------------------------------------------------------------------");
                 printf ("\nO tempo final que o algoritmo - Selection Sort - levou para ser computado foi de: %.8f s", elapsed);
-
+                
+                elapsed = 0;
                 free(vAux);
                 break;
             case 3:
@@ -117,7 +115,8 @@ int main(){
                 
                 printf ("\n---------------------------------------------------------------------------");
                 printf ("\nO tempo final que o algoritmo - Quick Sort - levou para ser computado foi de: %.8f s", elapsed);
-
+                
+                elapsed = 0;
                 free(vAux);
                 break;
             case 4:
@@ -135,7 +134,8 @@ int main(){
                 
                 printf ("\n---------------------------------------------------------------------------");
                 printf ("\nO tempo final que o algoritmo - Merge Sort - levou para ser computado foi de: %.8f s", elapsed);
-
+                
+                elapsed = 0;    
                 free(vAux);
                 break;
             case 5:
