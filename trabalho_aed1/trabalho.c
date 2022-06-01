@@ -95,24 +95,27 @@ void close(void *pAux){
     void *pClean= *(void **)(pAux + FIRST);
     int *pCounter = (int *)(pAux);
 
-    if ((int *)(pAux) == 0){
+    if (*pCounter == 0){
         printf("Lista vazia!");
     } else {
+        /* Enquanto houver informação no "first" ele segue entrando no laço */
         while (*(void **)(pAux + FIRST) != NULL) {
-            pClean = *(void **)(pAux + FIRST);
-            *(void **)(pAux + FIRST) = *(void **)(pClean + NEXT);
-            free(pClean);
+            pClean = *(void **)(pAux + FIRST); /* pClean recebe a primeira pessoa da lista */
+            *(void **)(pAux + FIRST) = *(void **)(pClean + NEXT); /* A primeira recebe a NEXT, como uma substituição, fazendo a fila andar */
+            free(pClean);  
+            /* free no clean pra eliminar a "FIRST" */
 
-            *pCounter-= 1;
+            *pCounter-= 1; 
+            /* pCounter ou  (int *)(pAux) é decrementado até o laço ser desfeito e a lista toda ser excluída*/
         }
     }
 }
 
 void addContact(void *pBuffer, void *pAux){
-    int *pCounter = (int *)(pAux);
+    int *pCounter = (int *)(pAux); /* contador */
 
     void *pData = NULL;
-    pData = malloc(NAME + AGE + PHONE + POINTER_MEMORY + POINTER_MEMORY);
+    pData = malloc(NAME + AGE + PHONE + POINTER_MEMORY + POINTER_MEMORY); /* armazena os dados de cada contato e inclui memoria p anterior e proximo */
 
     void *pDataAux = NULL;
 
@@ -138,9 +141,12 @@ void addContact(void *pBuffer, void *pAux){
     scanf("%d", &*(int *)(pData + NAME + AGE));
     getchar();
 
+    /* Espaços definidos */
     *(void **)(pData + NEXT) = NULL;   
     *(void **)(pData + PREVIOUS) = NULL;
 
+
+    /* Contador ainda não incrementado, então se for 0 significa que é a primeira pessoa, consequentemente é a última também */
     if (*pCounter == 0){
         *(void **)(pAux + LAST) = pData;
         *(void **)(pAux + FIRST) = pData;
@@ -150,15 +156,19 @@ void addContact(void *pBuffer, void *pAux){
         return;
     }
 
+
+    /* pBuffer atualizado com o endereço da primeira pessoa */
     pBuffer = *(void **)(pAux + FIRST);
 
+
+
     while(pBuffer != NULL){
-        if(strcmp((char *)pData, (char *)pBuffer) < 0){
+        /* ordem alfabetica e prioridade na fila */
+        if(strcmp((char *)pData, (char *)pBuffer) < 0){  /* implica que stringA < stringB */
             *(void **)(pData + PREVIOUS) = *(void **)(pBuffer + PREVIOUS);
             *(void **)(pData + NEXT) = pBuffer;
 
             if(*pCounter > 1 && *(void **)(pBuffer + PREVIOUS) != NULL){
-                pDataAux= *(void **)(pBuffer + PREVIOUS);
                 *(void **)(pDataAux + NEXT) = pData;
             }
 
@@ -203,17 +213,17 @@ void removeContact(void *pBuffer, void *pAux, void *pRead){
     } else {
         printf("\nRemovendo o primeiro nome da lista...\n");
         printf ("Removido com sucesso!\n\n");
-        pRead = *(void **)(pAux + FIRST);
-        *(void **)(pAux + FIRST) = *(void **)(pRead + NEXT);
-        free(pRead);
-        *(void **)(pBuffer + PREVIOUS) = NULL;
+        pRead = *(void **)(pAux + FIRST);       /* Recebe a FIRST */
+        *(void **)(pAux + FIRST) = *(void **)(pRead + NEXT); /* A NEXT passa a ser FIRST */
+        free(pRead);  /* Excluo a FIRST */
+        *(void **)(pBuffer + PREVIOUS) = NULL; /* Deixo espaço livre na ANTERIOR/PREVIOUS */
 
         *pCounter-= 1;
     }
 }
 
 void listContact(void *pBuffer, void *pAux){
-    void *pData = NULL;
+    void *pData = NULL;    /* ponteiro auxiliar apontando pro FIRST*/
     pData = *(void **)(pAux + FIRST);
 
     int *pCounter = (int *)(pAux);
